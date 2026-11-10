@@ -1,0 +1,10 @@
+pandas
+geopandas
+pyogrio
+fiona
+shapely
+matplotlib
+seaborn
+contextily
+folium
+openpyxl

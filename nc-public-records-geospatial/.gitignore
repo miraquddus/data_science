@@ -1,0 +1,11 @@
+# Raw public-record data and derived outputs are never committed (they contain names and addresses)
+data/
+output/
+*.gpkg
+*.gdb/
+*.shp
+*.shx
+*.dbf
+*.prj
+*.txt
+!requirements.txt

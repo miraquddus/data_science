@@ -1,0 +1,82 @@
+== 1. Create a database
+Successfully initialized dolt data repository.
+== 2. Create a table, add data, and commit
+commit 25kr6pmqlgp65ie0fhbeokghj9fg4eq9 (HEAD -> main) 
+Author: Demo User <demo@example.com>
+Date:  Mon Nov 09 13:45:19 -0500 2026
+
+	Initial commit: people table
+
++----+---------+-----+
+| id | name    | age |
++----+---------+-----+
+| 1  | Alice   | 25  |
+| 2  | Bob     | 30  |
+| 3  | Charlie | 35  |
++----+---------+-----+
+
+== 3. Change data and inspect the diff before committing
+diff --dolt a/people b/people
+--- a/people
++++ b/people
++---+----+---------+-----+
+|   | id | name    | age |
++---+----+---------+-----+
+| < | 2  | Bob     | 30  |
+| > | 2  | Bob     | 31  |
+| - | 3  | Charlie | 35  |
++---+----+---------+-----+
+commit mo11a4hrbr3ad8ph2jbg7c65006rbcv0 (HEAD -> main) 
+Author: Demo User <demo@example.com>
+Date:  Mon Nov 09 13:45:19 -0500 2026
+
+	Update Bob's age, remove Charlie
+
+== 4. Branch, change data on the branch, and merge back
+Switched to branch 'add-dana'
+commit bteglebq3fa9086jtmncb3jt20bduk8k (HEAD -> add-dana) 
+Author: Demo User <demo@example.com>
+Date:  Mon Nov 09 13:45:20 -0500 2026
+
+	Add Dana on feature branch
+
+Switched to branch 'main'
+Fast-forward
+Updating bteglebq3fa9086jtmncb3jt20bduk8k..bteglebq3fa9086jtmncb3jt20bduk8k
+people | 1 +
+1 tables changed, 1 rows added(+), 0 rows modified(*), 0 rows deleted(-)
++----+-------+-----+
+| id | name  | age |
++----+-------+-----+
+| 1  | Alice | 25  |
+| 2  | Bob   | 31  |
+| 4  | Dana  | 28  |
++----+-------+-----+
+
+== 5. Audit trail
+bteglebq3fa9086jtmncb3jt20bduk8k Add Dana on feature branch
+mo11a4hrbr3ad8ph2jbg7c65006rbcv0 Update Bob's age, remove Charlie
+25kr6pmqlgp65ie0fhbeokghj9fg4eq9 Initial commit: people table
+haqvd0j7imfm7jtm8ig6hqcvlh81t9e6 Initialize data repository
+== 6. Query a previous version (time travel), then revert the last change
++----+---------+-----+
+| id | name    | age |
++----+---------+-----+
+| 1  | Alice   | 25  |
+| 2  | Bob     | 30  |
+| 3  | Charlie | 35  |
++----+---------+-----+
+
+commit 6bnmdj5vuhfal5p76h1fmlc76voacr6l (HEAD -> main) 
+Author: Demo User <demo@example.com>
+Date:  Mon Nov 09 13:45:20 -0500 2026
+
+	Revert "Add Dana on feature branch"
+
++----+-------+-----+
+| id | name  | age |
++----+-------+-----+
+| 1  | Alice | 25  |
+| 2  | Bob   | 31  |
++----+-------+-----+
+
